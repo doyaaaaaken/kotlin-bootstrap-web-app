@@ -1,4 +1,8 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5442/dykn
+    driver-class-name: org.postgresql.Driver
+    username: dykn
   messages:
     basename: messages/messages
     encoding: UTF-8

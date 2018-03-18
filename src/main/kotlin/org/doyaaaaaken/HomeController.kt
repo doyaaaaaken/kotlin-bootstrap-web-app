@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import java.time.LocalDateTime
 import java.util.*
+import javax.sql.DataSource
 
 @Controller
 @RequestMapping("/")
-class HomeController {
+class HomeController(
+        private val dataSource: DataSource
+) {
 
     @GetMapping("")
     fun index(@RequestParam(value = "name", defaultValue = "World") name: String, model: Model): String {
@@ -26,8 +29,7 @@ class HomeController {
 
     @GetMapping("test")
     fun test(model: Model): String {
-        //TODO: driverの設定を、設定ファイルに移す
-        Database.connect("jdbc:postgresql://localhost:5442/dykn",  org.postgresql.Driver::class.java.name, "dykn")
+        Database.connect(dataSource)
 
         transaction {
             Users.insert {
@@ -52,12 +54,12 @@ class HomeController {
         return "home/show"
     }
 
-    object Users: LongIdTable("users") {
+    object Users : LongIdTable("users") {
         val name = varchar("name", 32)
     }
 
-    class User(id: EntityID<Long>): LongEntity(id) {
-        companion object: LongEntityClass<User>(Users)
+    class User(id: EntityID<Long>) : LongEntity(id) {
+        companion object : LongEntityClass<User>(Users)
 
         var name by Users.name
     }
