@@ -1,0 +1,7 @@
+spring:
+  freemarker:
+        cache: false
+        charset: UTF-8
+        settings:
+          output_format: HTMLOutputFormat
+          number_format: computer
