@@ -1,9 +1,8 @@
-package org.doyaaaaaken
+package org.doyaaaaaken.controller
 
-import org.jetbrains.exposed.dao.EntityID
-import org.jetbrains.exposed.dao.LongEntity
-import org.jetbrains.exposed.dao.LongEntityClass
-import org.jetbrains.exposed.dao.LongIdTable
+import org.doyaaaaaken.infrastructure.rdb.dao.User
+import org.doyaaaaaken.infrastructure.rdb.table.Users
+import org.doyaaaaaken.service.DashboardService
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Controller
@@ -18,7 +17,8 @@ import javax.sql.DataSource
 @Controller
 @RequestMapping("/")
 class HomeController(
-        private val dataSource: DataSource
+        private val dataSource: DataSource,
+        private val dashboardService: DashboardService
 ) {
 
     @GetMapping("")
@@ -52,15 +52,5 @@ class HomeController(
 
         model.addAllAttributes(mapOf("test" to "testValue"))
         return "home/show"
-    }
-
-    object Users : LongIdTable("users") {
-        val name = varchar("name", 32)
-    }
-
-    class User(id: EntityID<Long>) : LongEntity(id) {
-        companion object : LongEntityClass<User>(Users)
-
-        var name by Users.name
     }
 }
