@@ -3,5 +3,5 @@
 Boilerplate code on web application, written by Spring Boot with Kotlin.
 
 * WebApplicationFramework: SpringBoot
-* TemplateEngine: FreeMaker
+* TemplateEngine: FreeMarker
 * OR Mapper: Exposed
