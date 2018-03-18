@@ -1,7 +1,14 @@
 spring:
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
   freemarker:
         cache: false
         charset: UTF-8
         settings:
           output_format: HTMLOutputFormat
           number_format: computer
+#      FIXME: 下記issueが修正されたタイミング(spring5予定)で/spring.ftlをimportするように修正する
+#      https://jira.spring.io/browse/SPR-14740?jql=text%20~%20%22Syntax%20error%20in%20template%22
+#      AutoEscapeを利用するためにspring.ftlをコピーして修正したものをimportさせている
+          auto_import: /components/spring.ftl as spring
