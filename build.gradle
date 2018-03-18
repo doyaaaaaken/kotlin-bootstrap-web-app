@@ -2,6 +2,7 @@ buildscript {
 	ext {
 		kotlinVersion = '1.2.30'
 		springBootVersion = '1.5.9.RELEASE'
+		exposed_version = '0.10.1'
 	}
 	repositories {
 		mavenCentral()
@@ -35,6 +36,7 @@ compileTestKotlin {
 
 repositories {
 	mavenCentral()
+	maven { url('https://dl.bintray.com/kotlin/exposed/') }
 }
 
 
@@ -43,5 +45,8 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile("org.springframework.boot:spring-boot-starter-web")
+
+	compile "org.jetbrains.exposed:exposed:$exposed_version"
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
