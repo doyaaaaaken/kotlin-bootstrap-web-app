@@ -1,9 +1,10 @@
 package org.doyaaaaaken
 
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.dao.EntityID
+import org.jetbrains.exposed.dao.LongEntity
+import org.jetbrains.exposed.dao.LongEntityClass
+import org.jetbrains.exposed.dao.LongIdTable
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import java.time.LocalDateTime
+import java.util.*
 
 @Controller
 @RequestMapping("/")
@@ -37,12 +39,26 @@ class HomeController {
             }
         }
 
+        transaction {
+            logger.addLogger(StdOutSqlLogger)
+
+            User.new {
+                name = UUID.randomUUID().toString().take(30)
+            }
+            println(User.all().map { it.name }.joinToString(" / "))
+        }
+
         model.addAllAttributes(mapOf("test" to "testValue"))
         return "home/show"
     }
 
-    object Users: Table("users") {
-        val id = long("id").primaryKey().autoIncrement()
+    object Users: LongIdTable("users") {
         val name = varchar("name", 32)
+    }
+
+    class User(id: EntityID<Long>): LongEntity(id) {
+        companion object: LongEntityClass<User>(Users)
+
+        var name by Users.name
     }
 }
