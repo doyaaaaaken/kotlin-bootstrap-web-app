@@ -1,4 +1,9 @@
 spring:
+  session:
+    store-type: redis
+  redis:
+    host: localhost
+    port: 6379
   datasource:
     url: jdbc:postgresql://localhost:5432/dykn
     driver-class-name: org.postgresql.Driver

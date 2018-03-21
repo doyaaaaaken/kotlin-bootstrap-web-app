@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam
 class HomeController(
         private val dashboardService: DashboardService
 ) {
-
     @GetMapping("")
     fun index(@RequestParam(value = "name", defaultValue = "World") name: String, model: Model): String {
         model.addAllAttributes(mapOf("test" to "testValue"))
