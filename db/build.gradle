@@ -13,7 +13,7 @@ if (project.hasProperty('env')) env = project.env
 
 flyway {
     if (env == 'local') {
-        url = 'jdbc:postgresql://localhost:5442/dykn'
+        url = 'jdbc:postgresql://localhost:5432/dykn'
         user = 'dykn'
         locations = ['filesystem:migration/ddl', 'filesystem:migration/testdata']
     }
