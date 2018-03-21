@@ -5,15 +5,10 @@ import org.junit.Test
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class ErrorControllerTest : BaseWebTest() {
+class HomeControllerTest : BaseWebTest() {
 
     @Test
-    fun error404() {
-        mockMvc.perform(get("/error/404")).andExpect(status().isOk())
-    }
-
-    @Test
-    fun error500() {
-        mockMvc.perform(get("/error/500")).andExpect(status().isOk())
+    fun index() {
+        mockMvc.perform(get("/")).andExpect(status().isOk())
     }
 }
