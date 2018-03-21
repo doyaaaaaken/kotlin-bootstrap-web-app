@@ -1,4 +1,4 @@
-package org.doyaaaaaken.component
+package org.doyaaaaaken.config
 
 import org.jetbrains.exposed.spring.SpringTransactionManager
 import org.springframework.context.annotation.Bean
