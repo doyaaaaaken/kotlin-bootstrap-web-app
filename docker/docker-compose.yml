@@ -9,3 +9,9 @@ services:
     environment:
       POSTGRES_USER: "dykn"
       POSTGRES_PASSWORD:
+
+  redis:
+    container_name: "my-redis"
+    image: redis:3.2
+    ports:
+      - "6379:6379"
