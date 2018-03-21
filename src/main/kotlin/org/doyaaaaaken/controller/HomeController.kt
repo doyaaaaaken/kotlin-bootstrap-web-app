@@ -1,6 +1,6 @@
 package org.doyaaaaaken.controller
 
-import org.doyaaaaaken.service.DashboardService
+import org.doyaaaaaken.service.logic.DashboardService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,8 +21,8 @@ class HomeController(
 
     @GetMapping("test")
     fun test(model: Model): String {
-        val testValue = dashboardService.test()
-        model.addAllAttributes(mapOf("test" to testValue))
+        val userListView = dashboardService.test()
+        model.addAllAttributes(mapOf("test" to userListView.value))
         return "home/show"
     }
 }

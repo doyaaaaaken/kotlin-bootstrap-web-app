@@ -1,6 +1,7 @@
-package org.doyaaaaaken.service
+package org.doyaaaaaken.service.logic
 
 import org.doyaaaaaken.domain.repository.UserRepository
+import org.doyaaaaaken.service.viewmodel.UserListView
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -9,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 class DashboardService(
         private val userRepository: UserRepository
 ) {
-    fun test(): String {
+    fun test(): UserListView {
         userRepository.insert()
         val results = userRepository.selectAll()
-        return results.map{ it.name }.joinToString(" / ")
+        return UserListView.from(results)
     }
 }

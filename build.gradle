@@ -53,4 +53,5 @@ dependencies {
 	compile "org.jetbrains.exposed:spring-transaction:$exposed_version"
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 }
